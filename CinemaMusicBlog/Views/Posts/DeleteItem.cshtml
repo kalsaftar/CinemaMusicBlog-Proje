@@ -1,0 +1,24 @@
+﻿@model CinemaMusicBlog.Models.PostItem
+
+<div class="container mt-5 text-white">
+    <div class="alert alert-danger">
+        <h3>Bu maddeyi silmek istediğine emin misin?</h3>
+        <p class="fs-4">"@Model.Baslik"</p>
+    </div>
+
+    <div class="card bg-dark border-secondary mb-4">
+        <div class="card-body">
+            <p class="card-text text-white-50">@Model.Icerik</p>
+            @if (!string.IsNullOrEmpty(Model.ResimYolu))
+            {
+                <img src="~/images/@Model.ResimYolu" style="max-width: 200px;" class="rounded" />
+            }
+        </div>
+    </div>
+
+    <form asp-action="DeleteItem">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger btn-lg">Evet, Sil!</button>
+        <a asp-action="Details" asp-route-id="@Model.PostId" class="btn btn-secondary btn-lg">Vazgeç</a>
+    </form>
+</div>

@@ -1,0 +1,76 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin Girişi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #0d1117;
+            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .form-control {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: white;
+        }
+
+        .btn-neon {
+            background: linear-gradient(45deg, #ff0055, #0011ff);
+            color: white;
+            border: none;
+            font-weight: bold;
+        }
+
+            .btn-neon:hover {
+                opacity: 0.9;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="login-card text-center">
+        <h3 class="mb-4 fw-bold">Admin Paneli</h3>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger p-2 small">@ViewBag.Error</div>
+        }
+
+        <form action="/Account/Login" method="post">
+            <div class="mb-3 text-start">
+                <label class="form-label text-white-50 small">Kullanıcı Adı</label>
+                <input type="text" name="username" class="form-control" placeholder="admin" required />
+            </div>
+            <div class="mb-4 text-start">
+                <label class="form-label text-white-50 small">Şifre</label>
+                <input type="password" name="password" class="form-control" placeholder="1234" required />
+            </div>
+            <button type="submit" class="btn btn-neon w-100 py-2 rounded-pill">Giriş Yap</button>
+        </form>
+
+        <div class="mt-4">
+            <a href="/Posts/Index" class="text-decoration-none text-white-50 small">← Siteye Dön</a>
+        </div>
+    </div>
+</body>
+</html>

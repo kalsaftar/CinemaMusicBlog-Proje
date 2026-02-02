@@ -1,0 +1,36 @@
+﻿@model CinemaMusicBlog.Models.PostItem
+
+<div class="container mt-5 text-white">
+    <h3>Maddeyi Düzenle</h3>
+
+    <form asp-action="EditItem" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label>Madde Başlığı</label>
+            <input asp-for="Baslik" class="form-control bg-dark text-white border-secondary" />
+        </div>
+
+        <div class="mb-3">
+            <label>Resmi Değiştir (İstemiyorsan boş bırak)</label>
+
+            @if (!string.IsNullOrEmpty(Model.ResimYolu))
+            {
+                <div class="mb-2">
+                    <img src="~/images/@Model.ResimYolu" width="100" class="rounded" />
+                    <small class="text-white-50">Şu anki resim</small>
+                </div>
+            }
+
+            <input type="file" name="ResimDosyasi" class="form-control bg-dark text-white border-secondary" />
+        </div>
+
+        <div class="mb-3">
+            <label>Yorumun</label>
+            <textarea asp-for="Icerik" rows="5" class="form-control bg-dark text-white border-secondary"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Güncelle</button>
+        <a asp-action="Details" asp-route-id="@Model.PostId" class="btn btn-secondary">İptal</a>
+    </form>
+</div>

@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Hakkımda";
+}
+
+<div class="container py-5">
+    <div class="row align-items-center">
+
+        <div class="col-lg-5 text-center mb-4 mb-lg-0">
+            <div class="position-relative d-inline-block">
+                <div class="position-absolute top-50 start-50 translate-middle rounded-circle"
+                     style="width: 310px; height: 310px; background: linear-gradient(45deg, var(--neon-red), var(--neon-blue)); filter: blur(30px); opacity: 0.4; z-index: -1;"></div>
+
+                <img src="~/images/sercan1.jpeg"
+                     class="rounded-circle shadow-lg border border-2 border-secondary"
+                     style="width: 300px; height: 300px; object-fit: cover;"
+                     alt="Sercan Profil">
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <h5 class="text-uppercase fw-bold mb-2" style="color: var(--neon-blue); letter-spacing: 2px;">MERHABA, BEN SERCAN</h5>
+            <h1 class="display-4 fw-bold text-white mb-4">Sinema ve Müziğin <span style="color: var(--neon-red);">Kesişim Noktası</span></h1>
+
+            <p class="lead text-white-50 mb-4">
+                Hoş geldiniz! Bu blog, sadece bir ödev projesi değil, aynı zamanda benim tutkularımı paylaştığım dijital bir arşiv.
+                Burada 60'ların siyah beyaz klasiklerinden, günümüzün modern rock tınılarına kadar geniş bir yelpazede içerik bulacaksınız.
+            </p>
+
+            <p class="text-white-50 mb-5">
+                C# ve Web Geliştirme üzerine çalışmalar yaparken, boş zamanlarımda film eleştirileri yazmayı ve yeni albümler keşfetmeyi seviyorum.
+                Amacım, izlediğim ve dinlediğim eserler hakkında samimi düşüncelerimi paylaşmak.
+            </p>
+
+            <div class="d-flex gap-3 flex-wrap">
+                <span class="badge bg-dark border border-secondary p-3 rounded-pill text-white-50">🎵 Müzik Tutkunu</span>
+                <span class="badge bg-dark border border-secondary p-3 rounded-pill text-white-50">🎬 Film Eleştirmeni</span>
+                <span class="badge bg-dark border border-secondary p-3 rounded-pill text-white-50">💻 C# Geliştirici</span>
+            </div>
+
+            <div class="mt-5">
+
+                <a href="https://www.instagram.com/psychojoji/" target="_blank"
+                   class="text-white me-4 fs-4 icon-hover text-decoration-none">
+                    <i class="bi bi-instagram"></i>
+                </a>
+
+                <a href="https://twitter.com/keskeistemesem" target="_blank"
+                   class="text-white me-4 fs-4 icon-hover text-decoration-none">
+                    <i class="bi bi-twitter-x"></i>
+                </a>
+
+                <a href="https://github.com/kalsaftar" target="_blank"
+                   class="text-white me-4 fs-4 icon-hover text-decoration-none">
+                    <i class="bi bi-github"></i>
+                </a>
+
+                <a href="https://www.linkedin.com/in/sercan-demir-62272739a/" target="_blank"
+                   class="text-white fs-4 icon-hover text-decoration-none">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+
+            </div>
+
+            <style>
+                .icon-hover {
+                    transition: all 0.3s ease;
+                    opacity: 0.7;
+                }
+
+                    .icon-hover:hover {
+                        opacity: 1;
+                        color: var(--neon-blue) !important;
+                        transform: scale(1.2);
+                    }
+            </style>
+        </div>
+    </div>
+</div>

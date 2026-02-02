@@ -1,0 +1,23 @@
+﻿@model CinemaMusicBlog.Models.Category
+
+@{
+    ViewData["Title"] = "Kategori Oluştur";
+}
+
+<h1>Kategori Oluştur</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label">Kategori Adı</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kategoriyi Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

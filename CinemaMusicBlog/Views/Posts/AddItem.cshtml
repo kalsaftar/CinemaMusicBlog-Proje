@@ -1,0 +1,26 @@
+﻿@model CinemaMusicBlog.Models.PostItem
+
+<div class="container mt-5 text-white">
+    <h3>Listeye Yeni Madde Ekle</h3>
+
+    <form asp-action="AddItem" enctype="multipart/form-data">
+        <input type="hidden" asp-for="PostId" value="@ViewBag.PostId" />
+
+        <div class="mb-3">
+            <label>Madde Başlığı (Örn: 1. Oldboy)</label>
+            <input asp-for="Baslik" class="form-control bg-dark text-white border-secondary" />
+        </div>
+
+        <div class="mb-3">
+            <label>Görsel Seç</label>
+            <input type="file" name="ResimDosyasi" class="form-control bg-dark text-white border-secondary" />
+        </div>
+
+        <div class="mb-3">
+            <label>Yorumun</label>
+            <textarea asp-for="Icerik" rows="5" class="form-control bg-dark text-white border-secondary"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Kaydet ve Listeye Ekle</button>
+    </form>
+</div>

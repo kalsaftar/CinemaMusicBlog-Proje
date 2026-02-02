@@ -1,0 +1,49 @@
+﻿@model CinemaMusicBlog.Models.Post
+
+@{
+    ViewData["Title"] = "Yeni Yazı";
+}
+
+<h1>Yeni Blog Yazısı Oluştur</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Title" class="control-label">Başlık</label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Content" class="control-label text-white mb-2">İçerik</label>
+
+                <textarea asp-for="Content" class="form-control" rows="15"
+                          style="background-color: #1a1a1a; color: #e0e0e0; border: 1px solid #333;"></textarea>
+
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Tags" class="control-label text-white mb-2">Etiketler (Virgülle ayırın)</label>
+                <input asp-for="Tags" class="form-control bg-dark text-white border-secondary" placeholder="#kültür, #sanat, #sinema" />
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label">Fotoğraf Seç</label>
+                <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CategoryId" class="control-label">Kategori</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Yazıyı Paylaş" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
