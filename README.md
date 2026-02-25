@@ -50,3 +50,4 @@ Projeyi kendi bilgisayarınızda çalıştırmak için:
 
 ---
 Developed by **[Sercan Demir]**
+
