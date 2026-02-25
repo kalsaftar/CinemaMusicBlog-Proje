@@ -1,0 +1,36 @@
+﻿@model CinemaMusicBlog.Models.Post
+
+@{
+    ViewData["Title"] = "Yazıyı Sil";
+}
+
+<div class="container mt-5">
+    <h2 class="display-6 text-danger fw-bold mb-4 border-bottom border-danger pb-3">
+        <i class="bi bi-exclamation-octagon-fill me-2"></i>
+        BU YAZIYI SİLMEK İSTEDİĞİNİZE EMİN MİSİNİZ?
+    </h2>
+
+    <div class="card bg-dark text-white border-secondary shadow-lg">
+        <div class="card-body p-4">
+            <h4 class="card-title text-info mb-3">@Model.Title</h4>
+            <hr class="border-secondary mb-4" />
+
+            <p class="card-text text-white-50 fs-5">
+                Dikkat! Bu işlem geri alınamaz. Bu yazıya bağlı tüm görseller ve maddeler de sistemden tamamen kaldırılacaktır.
+            </p>
+
+            <div class="mt-5 d-flex gap-3">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger btn-lg px-5 fw-bold shadow">
+                        <i class="bi bi-trash-fill me-2"></i>EVET, SİL
+                    </button>
+                </form>
+
+                <a asp-area="" asp-controller="Posts" asp-action="Index" class="btn btn-outline-secondary px-4">
+                    <i class="bi bi-arrow-left me-2"></i> Vazgeç, Arşive Dön
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

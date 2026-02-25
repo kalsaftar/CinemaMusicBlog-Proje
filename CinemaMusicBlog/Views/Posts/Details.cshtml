@@ -1,12 +1,16 @@
-﻿@model CinemaMusicBlog.Models.Post
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model CinemaMusicBlog.Models.Post
 
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = Model?.Title ?? "";
 
-    // Paylaşım Linklerini Hazırla (Clean Code: Logic'i blok içine aldık)
     string currentUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}";
     string encodedUrl = System.Net.WebUtility.UrlEncode(currentUrl);
-    string encodedTitle = System.Net.WebUtility.UrlEncode(Model.Title);
+    string encodedTitle = System.Net.WebUtility.UrlEncode(Model?.Title ?? "");
+
+    var categoryColor = Model?.Category?.Name == "Sinema"
+       ? "var(--neon-red)"
+       : "var(--neon-blue)";
 }
 
 <div class="container mt-5">
@@ -16,71 +20,93 @@
             <article>
 
                 <div class="mb-4">
-                    <a asp-controller="Posts" asp-action="ByCategory" asp-route-id="@Model.CategoryId"
-                       class="badge text-decoration-none px-3 py-2 rounded-pill shadow-sm mb-3"
-                       style="background-color: @(Model.Category?.Name == "Sinema" ? "var(--neon-red)" : "var(--neon-blue)"); color: white; font-size: 0.9rem; transition: transform 0.2s;">
-                        @Model.Category?.Name
-                    </a>
 
                     <span class="text-white-50 ms-2 small">
-                        <i class="bi bi-calendar3 me-1"></i> @Model.CreatedDate.ToString("dd MMMM yyyy")
+                        <i class="bi bi-calendar3 me-1"></i>
+                        @(Model?.CreatedDate.ToString("dd MMMM yyyy") ?? "")
                     </span>
 
-                    <h1 class="display-4 fw-bold text-white mt-2 mb-3" style="text-shadow: 0 0 20px rgba(255,255,255,0.1);">
-                        @Model.Title
+                    <h1 class="display-4 fw-bold text-white mt-2 mb-3"
+                        style="text-shadow: 0 0 20px rgba(255,255,255,0.1);">
+                        @Model?.Title
                     </h1>
 
                     <div class="d-flex gap-2 align-items-center mb-4 pb-4 border-bottom border-secondary border-opacity-25">
                         <span class="text-white-50 me-2 small">Paylaş:</span>
-                        <a href="https://wa.me/?text=@encodedTitle%20@encodedUrl" target="_blank" class="btn btn-outline-success btn-sm rounded-circle social-share-btn">
+
+                        <a href="https://wa.me/?text=@encodedTitle%20@encodedUrl"
+                           target="_blank"
+                           class="btn btn-outline-success btn-sm rounded-circle social-share-btn">
                             <i class="bi bi-whatsapp fs-5"></i>
                         </a>
-                        <a href="https://twitter.com/intent/tweet?text=@encodedTitle&url=@encodedUrl" target="_blank" class="btn btn-outline-light btn-sm rounded-circle social-share-btn">
+
+                        <a href="https://twitter.com/intent/tweet?text=@encodedTitle&url=@encodedUrl"
+                           target="_blank"
+                           class="btn btn-outline-light btn-sm rounded-circle social-share-btn">
                             <i class="bi bi-twitter-x fs-5"></i>
                         </a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=@encodedUrl" target="_blank" class="btn btn-outline-primary btn-sm rounded-circle social-share-btn">
+
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=@encodedUrl"
+                           target="_blank"
+                           class="btn btn-outline-primary btn-sm rounded-circle social-share-btn">
                             <i class="bi bi-facebook fs-5"></i>
                         </a>
                     </div>
                 </div>
 
-                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                @if (!string.IsNullOrEmpty(Model?.ImageUrl))
                 {
                     <div class="mb-5 rounded-4 overflow-hidden shadow-lg position-relative">
-                        <img src="~/images/@Model.ImageUrl" class="w-100 shadow-lg rounded-4"
-                             style="aspect-ratio: 16/9; object-fit: cover; object-position: center;" alt="@Model.Title">
+                        <img src="~/images/@Model!.ImageUrl"
+                             class="w-100 shadow-lg rounded-4"
+                             style="aspect-ratio: 16/9; object-fit: cover; object-position: center;"
+                             alt="@Model.Title">
                     </div>
                 }
 
-                <div class="mt-5 text-white-50 fs-5 mb-5" style="line-height: 1.8; white-space: pre-line;">
-                    @Model.Content
+                <div class="mt-5 text-white-50 fs-5 mb-5"
+                     style="line-height: 1.8; white-space: pre-line;">
+                    @Model?.Content
                 </div>
 
-                @if (Model.Items != null && Model.Items.Count > 0)
+                @if (Model?.Items != null && Model.Items.Count > 0)
                 {
                     <div class="list-items-section">
                         @foreach (var madde in Model.Items)
                         {
-                            <div class="mb-5 p-4 rounded-3 position-relative" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                            <div class="mb-5 p-4 rounded-3 position-relative"
+                                 style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
 
                                 <h3 class="text-white fw-bold mb-3">@madde.Baslik</h3>
 
                                 @if (!string.IsNullOrEmpty(madde.ResimYolu))
                                 {
-                                    <img src="~/images/@madde.ResimYolu" class="img-fluid rounded shadow-lg mb-4 w-100" alt="@madde.Baslik" />
+                                    <img src="~/images/@madde.ResimYolu"
+                                         class="img-fluid rounded shadow-lg mb-4 w-100"
+                                         alt="@madde.Baslik" />
                                 }
 
                                 <p class="text-white-50 fs-5" style="line-height: 1.8;">
                                     @madde.Icerik
                                 </p>
 
-                                @if (User.Identity.IsAuthenticated)
+                                @if (User.Identity != null && User.Identity.IsAuthenticated)
                                 {
                                     <div class="d-flex justify-content-end mt-3 border-top border-secondary border-opacity-25 pt-3">
-                                        <a asp-action="EditItem" asp-route-id="@madde.Id" class="btn btn-sm btn-outline-info me-2">
+
+                                        <a asp-area="Admin"
+                                           asp-controller="Posts"
+                                           asp-action="EditItem"
+                                           asp-route-id="@madde.Id"
+                                           class="btn btn-sm btn-outline-info me-2">
                                             <i class="bi bi-pencil"></i> Düzenle
                                         </a>
-                                        <a asp-action="DeleteItem" asp-route-id="@madde.Id" class="btn btn-sm btn-outline-danger">
+
+                                        <a asp-area="Admin"
+                                           asp-controller="Posts"
+                                           asp-action="DeleteItem"
+                                           asp-route-id="@madde.Id"
+                                           class="btn btn-sm btn-outline-danger">
                                             <i class="bi bi-trash"></i> Sil
                                         </a>
                                     </div>
@@ -90,7 +116,7 @@
                     </div>
                 }
 
-                @if (!string.IsNullOrEmpty(Model.Tags))
+                @if (!string.IsNullOrEmpty(Model?.Tags))
                 {
                     <div class="mb-5">
                         @foreach (var etiket in Model.Tags.Split(','))
@@ -104,19 +130,35 @@
 
             </article>
 
-            @if (User.Identity.IsAuthenticated)
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
             {
                 <div class="card bg-dark border-warning mb-5 shadow">
                     <div class="card-body">
-                        <h5 class="text-warning fw-bold mb-3"><i class="bi bi-gear-fill me-2"></i>Yönetici İşlemleri</h5>
+                        <h5 class="text-warning fw-bold mb-3">
+                            <i class="bi bi-gear-fill me-2"></i>Yönetici İşlemleri
+                        </h5>
                         <div class="d-flex flex-wrap gap-2">
-                            <a asp-action="AddItem" asp-route-id="@Model.Id" class="btn btn-warning text-dark fw-bold">
+                            <a asp-area="Admin"
+                               asp-controller="Posts"
+                               asp-action="AddItem"
+                               asp-route-id="@Model?.Id"
+                               class="btn btn-warning text-dark fw-bold">
                                 <i class="bi bi-plus-circle me-1"></i> Madde Ekle
                             </a>
-                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-light">
+
+                            <a asp-area="Admin"
+                               asp-controller="Posts"
+                               asp-action="Edit"
+                               asp-route-id="@Model?.Id"
+                               class="btn btn-outline-light">
                                 <i class="bi bi-pencil-square me-1"></i> Yazıyı Düzenle
                             </a>
-                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">
+
+                            <a asp-area="Admin"
+                               asp-controller="Posts"
+                               asp-action="Delete"
+                               asp-route-id="@Model?.Id"
+                               class="btn btn-outline-danger">
                                 <i class="bi bi-trash me-1"></i> Yazıyı Sil
                             </a>
                         </div>
@@ -136,20 +178,34 @@
         <div class="col-lg-3 mt-5 mt-lg-0">
             <aside class="sticky-top" style="top: 100px; z-index: 1;">
 
-                <h5 class="text-white fw-bold mb-4 pb-2 border-bottom border-secondary border-opacity-25" style="color: var(--neon-blue) !important;">
+                <h5 class="text-white fw-bold mb-4 pb-2 border-bottom border-secondary border-opacity-25"
+                    style="color: var(--neon-blue) !important;">
                     BUNLARI DA BEĞENEBİLİRSİNİZ
                 </h5>
 
+                @{
+                    var onerilenler = ViewBag.Onerilenler as List<CinemaMusicBlog.Models.Post>;
+                }
+
                 <div class="d-flex flex-column gap-4">
-                    @if (ViewBag.Onerilenler != null)
+                    @if (onerilenler != null)
                     {
-                        @foreach (var item in ViewBag.Onerilenler as List<CinemaMusicBlog.Models.Post>)
+                        @foreach (var item in onerilenler)
                         {
-                            <a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none group">
+                            var title = item.Title ?? "";
+
+                            <a asp-action="Details"
+                               asp-route-id="@item.Id"
+                               class="text-decoration-none group">
+
                                 <div class="card modern-card border-0 h-100 shadow-sm bg-dark">
+
                                     @if (!string.IsNullOrEmpty(item.ImageUrl))
                                     {
-                                        <img src="~/images/@item.ImageUrl" class="card-img-top" style="height: 120px; object-fit: cover;" alt="@item.Title">
+                                        <img src="~/images/@item.ImageUrl"
+                                             class="card-img-top"
+                                             style="height: 120px; object-fit: cover;"
+                                             alt="@title">
                                     }
                                     else
                                     {
@@ -157,11 +213,14 @@
                                     }
 
                                     <div class="card-body p-3">
-                                        <small class="fw-bold text-uppercase" style="font-size: 0.7rem; color: @(item.Category?.Name == "Sinema" ? "var(--neon-red)" : "var(--neon-blue)");">
+                                        <small class="fw-bold text-uppercase"
+                                               style="font-size: 0.7rem; color: @(item.Category?.Name == "Sinema" ? "var(--neon-red)" : "var(--neon-blue)");">
                                             @item.Category?.Name
                                         </small>
-                                        <h6 class="card-title text-white fw-bold mt-1 mb-0" style="font-size: 0.95rem;">
-                                            @(item.Title.Length > 50 ? item.Title.Substring(0, 50) + "..." : item.Title)
+
+                                        <h6 class="card-title text-white fw-bold mt-1 mb-0"
+                                            style="font-size: 0.95rem;">
+                                            @(title.Length > 50 ? title.Substring(0, 50) + "..." : title)
                                         </h6>
                                     </div>
                                 </div>
@@ -176,14 +235,15 @@
                 </h5>
 
                 <div class="mt-2 shadow-lg overflow-hidden" style="border-radius: 12px;">
-                    <iframe data-testid="embed-iframe" style="border-radius:12px"
+                    <iframe data-testid="embed-iframe"
                             src="https://open.spotify.com/embed/playlist/3hKOrKVtGSZOJtcCjcaNHB?utm_source=generator"
-                            width="100%" height="352"
-                            frameBorder="0"
-                            allowfullscreen=""
+                            style="border-radius:12px; width:100%; height:352px;"
+                            frameborder="0"
+                            allowfullscreen
                             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                             loading="lazy">
                     </iframe>
+                </div>
 
             </aside>
         </div>
@@ -192,7 +252,6 @@
 </div>
 
 <style>
-    /* Ufak bir CSS dokunuşu: Paylaş butonlarını ortala */
     .social-share-btn {
         width: 40px;
         height: 40px;

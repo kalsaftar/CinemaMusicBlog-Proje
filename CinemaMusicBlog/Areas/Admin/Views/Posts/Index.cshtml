@@ -13,7 +13,7 @@
 
         @if (User.Identity.IsAuthenticated)
         {
-            <a asp-area="Admin" asp-controller="Posts" asp-action="Create" class="btn btn-neon shadow-lg">
+            <a asp-action="Create" class="btn btn-neon shadow-lg">
                 <i class="bi bi-plus-lg me-1"></i> Yeni Yazı Ekle
             </a>
         }
@@ -85,20 +85,15 @@
                                            asp-controller="Posts"
                                            asp-action="Edit"
                                            asp-route-id="@item.Id"
-                                           class="text-warning me-2"
-                                           title="Düzenle">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
+                                           class="text-warning me-2 text-decoration-none"
+                                           title="Düzenle"><i class="bi bi-pencil-square"></i></a>
 
                                         <a asp-area="Admin"
                                            asp-controller="Posts"
                                            asp-action="Delete"
                                            asp-route-id="@item.Id"
-                                           class="text-danger"
-                                           title="Sil">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-
+                                           class="text-danger text-decoration-none"
+                                           title="Sil"><i class="bi bi-trash"></i></a>
                                     </div>
                                 }
                             </div>

@@ -3,12 +3,17 @@
 <div class="container mt-5 text-white">
     <h3>Listeye Yeni Madde Ekle</h3>
 
+    <!-- ÜSTTE GENEL HATA ÖZETİ -->
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
     <form asp-action="AddItem" enctype="multipart/form-data">
         <input type="hidden" asp-for="PostId" value="@ViewBag.PostId" />
 
         <div class="mb-3">
             <label>Madde Başlığı (Örn: 1. Oldboy)</label>
             <input asp-for="Baslik" class="form-control bg-dark text-white border-secondary" />
+            <!-- BAŞLIK HATASI -->
+            <span asp-validation-for="Baslik" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
@@ -19,8 +24,14 @@
         <div class="mb-3">
             <label>Yorumun</label>
             <textarea asp-for="Icerik" rows="5" class="form-control bg-dark text-white border-secondary"></textarea>
+            <!-- İÇERİK HATASI -->
+            <span asp-validation-for="Icerik" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-success">Kaydet ve Listeye Ekle</button>
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
