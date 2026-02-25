@@ -1,25 +1,25 @@
 ﻿# 🎬 CinemaMusicBlog
-### ASP.NET Core MVC Blog Uygulaması
+### ASP.NET Core MVC Blog Application
 
 ---
 
-## 📌 Proje Tanımı
+## 📌 Project Description
 
-CinemaMusicBlog, ASP.NET Core MVC mimarisi kullanılarak geliştirilmiş dinamik bir blog uygulamasıdır.
+CinemaMusicBlog is a dynamic blog application developed using the ASP.NET Core MVC architecture.
 
-### Sistem İki Ana Bölümden Oluşur:
+### The System Consists of Two Main Sections:
 
-- **Public Alan:**  
-  Ziyaretçiler anonim olarak içerikleri görüntüleyebilir.
+- **Public Area:**  
+  Visitors can view content anonymously.
 
-- **Admin Alanı:**  
-  Yetkili kullanıcı giriş yaparak içerik oluşturabilir, düzenleyebilir ve silebilir.
+- **Admin Area:**  
+  Authorized users can log in to create, edit, and delete content.
 
-Proje, eğitim kapsamında object-oriented prensiplere uygun şekilde geliştirilmiştir.
+The project was developed for educational purposes in accordance with object-oriented principles.
 
 ---
 
-## 🏗 Kullanılan Teknolojiler
+## 🏗 Technologies Used
 
 - ASP.NET Core MVC
 - Entity Framework Core (Code First)
@@ -31,58 +31,60 @@ Proje, eğitim kapsamında object-oriented prensiplere uygun şekilde geliştiri
 
 ---
 
-## 🧠 Mimari Yapı
+## 🧠 Architectural Structure
 
-Proje MVC (Model–View–Controller) mimarisine uygun olarak geliştirilmiştir.
+The project was developed in accordance with the MVC (Model–View–Controller) architecture.
 
-- **Model:** Post, Category ve Admin entity sınıfları
-- **View:** Razor tabanlı dinamik arayüz
-- **Controller:** CRUD işlemleri ve iş akışı yönetimi
-- **Area Yapısı:** Admin ve Public arayüzler ayrılmıştır
+- **Model:** Post, Category, and Admin entity classes
+- **View:** Razor-based dynamic interface
+- **Controller:** CRUD operations and workflow management
+- **Area Structure:** Admin and Public interfaces are separated
 
 ---
 
-## 🗄 Veritabanı
+## 🗄 Database
 
-Proje Entity Framework Core Code First yaklaşımı ile geliştirilmiştir.
+The project was developed using the Entity Framework Core Code First approach.
 
-Uygulama başlatıldığında veritabanı otomatik oluşturulur.
+When the application is started, the database is created automatically.
 
-Manuel oluşturmak için:
+To create it manually:
 
-```
+```powershell
 Update-Database
-
 ```
-## 🔐 Admin Girişi
 
-İlk çalıştırmada otomatik admin oluşturulur:
+---
+
+## 🔐 Admin Login
+
+An admin user is automatically created on first run:
 
 - **Username:** `admin`
 - **Password:** `1234`
 
-> Not: Bu proje eğitim amaçlıdır. Şifre doğrulama mekanizması basit tutulmuştur.
+> Note: This project is for educational purposes. The password validation mechanism is kept simple.
 
 ---
 
-## 🎯 Proje Özellikleri
+## 🎯 Project Features
 
-- Blog içerik listeleme
-- İçerik detay sayfası
-- Kategori filtreleme
-- Admin paneli
-- CRUD işlemleri
-- Resim yükleme
-- Cookie tabanlı kimlik doğrulama
-- Entity Framework Core ile veritabanı entegrasyonu
+- Blog content listing
+- Content detail page
+- Category filtering
+- Admin panel
+- CRUD operations
+- Image upload
+- Cookie-based authentication
+- Database integration with Entity Framework Core
 
 ---
 
-## 📎 Teslim Notu
+## 📎 Submission Note
 
-Bu proje MCSD bitirme projesi kapsamında hazırlanmıştır.
+This project was prepared as part of the MCSD graduation project.
 
-- ✔ Veritabanı içermektedir.
-- ✔ Object-Oriented prensiplere uygun geliştirilmiştir.
-- ✔ HTML ve CSS tasarımsal kodlama içermektedir.
-- ✔ ASP.NET Core MVC mimarisi kullanılmıştır.
+- ✔ Includes a database.
+- ✔ Developed in accordance with Object-Oriented principles.
+- ✔ Includes HTML and CSS design coding.
+- ✔ ASP.NET Core MVC architecture was used.
